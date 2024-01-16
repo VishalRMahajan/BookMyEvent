@@ -8,7 +8,7 @@ class RegisterStudent(FlaskForm):
     pid = StringField('pid', validators=[InputRequired(), Length(min=6, max=6)], render_kw={"placeholder": "Enter your PID"})
     first_name = StringField('first_name', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Enter your First Name"})
     last_name = StringField('last_name', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Enter your Last Name"})
-    email = StringField('email', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Enter your Email"})
+    email = StringField('email', validators=[InputRequired(), Length(min=4, max=30)], render_kw={"placeholder": "Enter your Email"})
     password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Enter your Password"})
     confirm_password = PasswordField('confirmpassword', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Confirm Password"})
     submit = SubmitField('Register')

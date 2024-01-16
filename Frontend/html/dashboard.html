@@ -1,27 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="{{ url_for('static', filename='../css/tailwind.css') }}" rel="stylesheet">
-  <title>DashBoard</title>
-</head>
+{% block content %}
+<title>{{first_name}}'s Dashboard</title>
+<section class="main">
+  <div class="fest text">
+    <div class="card">
+      <div class="flex items-center justify-center">
+        <img src="{{ url_for('static', filename='../css/Irislogo.jpg') }}" class="h-16 w-16 rounded-full mt-2">
+      </div>
+      <h3>IRIS</h3>
+      <p>Cultural Fest of SFIT</p>
+      <button class="bg-[#002D74] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
+        Started</button>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-center">
+        <img src="{{ url_for('static', filename='../css/Mosaic Logo.jpg') }}" class="h-16 w-16 rounded-full mt-2">
+      </div>
+      <h3>Mosaic</h3>
+      <p>Technical Fest of SFIT</p>
+      <button class="bg-[#002D74] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
+        Started</button>
+    </div>
+    <div class="card">
+      <div class="flex items-center justify-center">
+        <img src="{{ url_for('static', filename='../css/Ignitra Logo.jpg') }}" class="h-16 w-16 rounded-full mt-2">
+      </div>
+      <h3>Ignitra</h3>
+      <p>Sport Fest of SFIT</p>
+      <button class="bg-[#002D74] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
+        Started</button>
+    </div>
+  </div>
 
-<body>
-  <section class="bg-gray-50 min-h-screen flex items-center justify-center">
-    <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
-      <div class=" px-8 md:px-16">
-        <h2 class="font-bold text-2xl text-[#002D74] text-center">Index</h2>
-
-        <div class="mt-5 flex flex-col gap-4">
-          <a href="{{url_for('logout')}}">
-            <button class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300">logout</button>
-          </a>
+  <section class="main-event">
+    <h1>Ongoing Events</h1>
+    <div class="event-box">
+      <ul>
+        <li class="active">In progress</li>
+        <li>explore</li>
+        <li>incoming</li>
+        <li>finished</li>
+      </ul>
+      <div class="event">
+        <div class="box">
+          <h3>Event 1</h3>
+          <p>Date</p>
+          <button>Buy Ticket</button>
+        </div>
+        <div class="box">
+          <h3>Event 2</h3>
+          <p>Date</p>
+          <button>Buy Ticket</button>
+        </div>
+        <div class="box">
+          <h3>Event 3</h3>
+          <p>Date</p>
+          <button>Buy Ticket</button>
         </div>
       </div>
     </div>
   </section>
-</body>
 
-</html>
+</section>
+{% endblock %}

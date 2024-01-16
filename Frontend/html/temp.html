@@ -1,0 +1,57 @@
+<div class="container">
+      
+
+    <section class="profile items-center">
+
+        <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5">
+
+            <div>
+                <h2 class="font-bold text-2xl text-[#002D74] text-center">Profile</h2>
+                <p class="text-xs mt-2  text-[#002D74] text-center"></p>
+
+                <form id="profile-form" action="{{ url_for('update_profile') }}" method="POST"
+                    class="flex flex-col mt-8 gap-4 px-8 md:px-16">
+                    <div>
+                        <input type="text" name="first_name" value="{{ first_name }}" readonly
+                            class="p-2 bg-gray-200 rounded-xl border">
+                        <input type="text" name="last_name" value="{{ last_name }}" readonly
+                            class="p-2 bg-gray-200 rounded-xl border">
+                    </div>
+
+                    <input type="text" name="pid" value="{{ pid }}" readonly
+                        class="p-2 bg-gray-200 rounded-xl border">
+                    <input type="text" value="{{ email }}" readonly class="p-2 bg-gray-200 rounded-xl border">
+                    <button id="update-button" type="button"
+                        class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300">Update</button>
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+    <script>
+        document.getElementById('update-button').addEventListener('click', function () {
+            var inputs = Array.from(document.querySelectorAll('input[name="first_name"], input[name="last_name"], input[name="pid"]'));
+            if (this.textContent === 'Update') {
+                this.textContent = 'Save';
+                // Make the form fields editable and white
+                inputs.forEach(function (input) {
+                    input.removeAttribute('readonly');
+                    input.classList.remove('bg-gray-200');
+                    input.classList.add('bg-white');
+                });
+            } else {
+                this.textContent = 'Update';
+                // Make the form fields non-editable and gray
+                inputs.forEach(function (input) {
+                    input.setAttribute('readonly', '');
+                    input.classList.remove('bg-white');
+                    input.classList.add('bg-gray-200');
+                });
+            }
+        });
+    </script>
+</div>
