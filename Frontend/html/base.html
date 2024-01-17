@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" />
 </head>
 
-<body>
+<body class="bg-[#0a192f]">
 
   <span class="absolute text-white text-4xl top-5 left-4 cursor-pointer" onclick="openSidebar()">
     <i class="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
@@ -83,8 +83,15 @@
     dropdown();
 
     function openSidebar() {
-      document.querySelector(".sidebar").classList.toggle("hidden");
+    var sidebar = document.querySelector(".sidebar");
+    if (sidebar.classList.contains("hidden")) {
+      sidebar.classList.remove("hidden");
+      sidebar.classList.add("block"); // Add a class that sets display: block;
+    } else {
+      sidebar.classList.add("hidden");
+      sidebar.classList.remove("block"); // Remove the class that sets display: block;
     }
+  }
   </script>
 </body>
 

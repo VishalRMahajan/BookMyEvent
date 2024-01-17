@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <section class="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-sky-500 to-sky-500 min-h-screen flex items-center justify-center">
+    <section class="bg-[#0a192f] min-h-screen flex items-center justify-center">
 
         <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5">
 
@@ -35,6 +35,7 @@
                     </div>
                     {% endif %}
                     {{ form.pid(class="p-2 rounded-xl border") }}
+                    {{ form.role(class="p-2 rounded-xl border w-full") }}
 
                     {% if form.email.errors %}
                     <div class="flex items-center text-sm text-red-800" role="alert">
