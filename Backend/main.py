@@ -4,9 +4,10 @@ from modules.users import views
 from modules.fest import views
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
-from modules.fest.models import Fest, Event
+from modules.fest.models import Event
 from modules.users.models import Student,Committee
 from modules.users.forms import loginStudent, RegisterStudent
+from datetime import datetime
 
 @app.route('/')
 def home():
@@ -16,7 +17,9 @@ def home():
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
-    return render_template('dashboard.html', first_name=current_user.first_name, role=current_user.role)
+    today = datetime.today()
+    in_progress_events = Event.query.filter(Event.event_datetime >= today).all()
+    return render_template('dashboard.html', first_name=current_user.first_name, role=current_user.role, in_progress_events=in_progress_events)
 
 
 @app.route('/profile')

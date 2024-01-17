@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<title>Add Event</title>
+<form method="POST" class="p-5 h-screen ">
+    {{ form.hidden_tag() }}
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
+        <div>
+            <label for="event_name" class="block mb-2 text-sm font-medium  text-white">Event name</label>
+            {{ form.event_name(class=" block w-full p-2.5 bg-gray-700 rounded-lg border-gray-600 placeholder-gray-400
+            text-white focus:ring-blue-500 focus:border-blue-500") }}
+        </div>
+
+        <div>
+            <label for="event_date" class="block mb-2 text-sm font-medium text-white">Event Date</label>
+            {{ form.event_datetime(class="block w-full p-2.5 bg-gray-700 rounded-lg border-gray-600 placeholder-gray-400
+            text-white focus:ring-blue-500 focus:border-blue-500") }}
+        </div>
+
+        <div>
+            <label for="committee" class="block mb-2 text-sm font-medium  text-white">Committee</label>
+            {{ form.committee(class=" block w-full p-2.5 bg-gray-700 rounded-lg border-gray-600 placeholder-gray-400
+            text-white focus:ring-blue-500 focus:border-blue-500") }}
+        </div>
+        <div>
+            <label for="fest" class="block mb-2 text-sm font-medium  text-white">Fest</label>
+            {{ form.fest(class=" block w-full p-2.5 bg-gray-700 rounded-lg border-gray-600 placeholder-gray-400
+            text-white focus:ring-blue-500 focus:border-blue-500") }}
+        </div>
+        <div>
+            <label for="ticket_price" class="block mb-2 text-sm font-medium  text-white">Ticket Price</label>
+            {{ form.ticket_price(class=" block w-full p-2.5 bg-gray-700 rounded-lg border-gray-600 placeholder-gray-400
+            text-white focus:ring-blue-500 focus:border-blue-500") }}
+        </div>
+        <div>
+            <label for="Event Venue" class="block mb-2 text-sm font-medium  text-white">Venue</label>
+            {{ form.venue(class=" block w-full p-2.5 bg-gray-700 rounded-lg border-gray-600 placeholder-gray-400
+            text-white focus:ring-blue-500 focus:border-blue-500") }}
+        </div>
+        <div>
+            <label for="Contact Person" class="block mb-2 text-sm font-medium  text-white">Contact Person</label>
+            {{ form.contact_person(class=" block w-full p-2.5 bg-gray-700 rounded-lg border-gray-600
+            placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500") }}
+        </div>
+        <div>
+            <label for="Contact Number" class="block mb-2 text-sm font-medium  text-white">Contact Number</label>
+            {{ form.phone_number(class=" block w-full p-2.5 bg-gray-700 rounded-lg border-gray-600 placeholder-gray-400
+            text-white focus:ring-blue-500 focus:border-blue-500") }}
+        </div>
+    </div>
+    <div class="mb-6">
+        <label for="Description" class="block mb-2 text-sm font-medium  text-white">Description</label>
+        {{ form.description(class=" block w-full p-2.5 h-60 bg-gray-700 rounded-lg border-gray-600 placeholder-gray-400
+        text-white focus:ring-blue-500 focus:border-blue-500") }}
+    </div>
+
+    {{ form.submit(class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto
+    px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800") }}
+</form>
+
+{% endblock %}

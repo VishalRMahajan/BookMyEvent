@@ -5,75 +5,89 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="{{ url_for('static', filename='../css/tailwind.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="../css/dashboard.css" />
+  
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" />
 </head>
 
 <body class="bg-[#0a192f]">
+  <div class="flex flex-col h-screen">
+    <span class="absolute text-white text-4xl top-5 left-4 cursor-pointer" onclick="openSidebar()">
+      <i class="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
+    </span>
 
-  <span class="absolute text-white text-4xl top-5 left-4 cursor-pointer" onclick="openSidebar()">
-    <i class="bi bi-filter-left px-2 bg-gray-900 rounded-md"></i>
-  </span>
-
-  <div class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900">
-    <div class="text-gray-100 text-xl">
-      <div class="p-2.5 mt-1 flex items-center">
-        <i class="bi bi-app-indicator px-2 py-1 rounded-md bg-blue-600"></i>
-        <h1 class="font-bold text-gray-200 text-[15px] ml-3">SFIT Event</h1>
-        <i class="bi bi-x cursor-pointer ml-28 lg:hidden" onclick="openSidebar()"></i>
+    <div class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900">
+      <div class="text-gray-100 text-xl">
+        <div class="p-2.5 mt-1 flex items-center">
+          <i class="bi bi-app-indicator px-2 py-1 rounded-md bg-blue-600"></i>
+          <h1 class="font-bold text-gray-200 text-[15px] ml-3">SFIT Event</h1>
+          <i class="bi bi-x cursor-pointer ml-28 lg:hidden" onclick="openSidebar()"></i>
+        </div>
+        <div class="my-2 bg-gray-600 h-[1px]"></div>
       </div>
-      <div class="my-2 bg-gray-600 h-[1px]"></div>
+
+      <a href="{{url_for('dashboard')}}">
+        <div
+          class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+          <i class="bi bi-house-door-fill"></i>
+
+          <span class="text-[15px] ml-4 text-gray-200 font-bold">Home</span>
+        </div>
+      </a>
+      <a href="{{url_for('profile')}}">
+        <div
+          class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+          <i class="bi bi-person-fill"></i>
+          <span class="text-[15px] ml-4 text-gray-200 font-bold">Profile</span>
+        </div>
+      </a>
+      {% if current_user.role == 'Committee' %}
+      <div class="my-4 bg-gray-600 h-[1px]"></div>
+      <a href="{{url_for('addevent')}}">
+        <div
+          class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+          <i class="bi bi-card-text"></i>
+          <span class="text-[15px] ml-4 text-gray-200 font-bold">Add Event</span>
+        </div>
+      </a>
+      {% endif %}
+      <div class="my-4 bg-gray-600 h-[1px]"></div>
+      <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+        onclick="dropdown()">
+        <i class="bi bi-people-fill"></i>
+        <div class="flex justify-between w-full items-center">
+          <span class="text-[15px] ml-4 text-gray-200 font-bold">Committee</span>
+          <span class="text-sm rotate-180" id="arrow">
+            <i class="bi bi-chevron-down"></i>
+          </span>
+        </div>
+      </div>
+      <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold" id="submenu">
+        <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+          ITSA
+        </h1>
+        <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+          ISTE
+        </h1>
+        <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
+          CSI
+        </h1>
+      </div>
+      <a href="{{url_for('logout')}}">
+        <div
+          class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
+        </div>
+      </a>
     </div>
-
-    <a href="{{url_for('dashboard')}}">
-      <div
-        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-        <i class="bi bi-house-door-fill"></i>
-
-        <span class="text-[15px] ml-4 text-gray-200 font-bold">Home</span>
-      </div>
-    </a>
-    <a href="{{url_for('profile')}}">
-      <div
-        class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-        <i class="bi bi-person-fill"></i>
-        <span class="text-[15px] ml-4 text-gray-200 font-bold">Profile</span>
-      </div>
-    </a>
-    <div class="my-4 bg-gray-600 h-[1px]"></div>
-    <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
-      onclick="dropdown()">
-      <i class="bi bi-people-fill"></i>
-      <div class="flex justify-between w-full items-center">
-        <span class="text-[15px] ml-4 text-gray-200 font-bold">Committee</span>
-        <span class="text-sm rotate-180" id="arrow">
-          <i class="bi bi-chevron-down"></i>
-        </span>
-      </div>
-    </div>
-    <div class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold" id="submenu">
-      <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-        ITSA
-      </h1>
-      <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-        ISTE
-      </h1>
-      <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
-        CSI
-      </h1>
-    </div>
-    <a href="{{url_for('logout')}}">
-      <div class="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white">
-        <i class="bi bi-box-arrow-in-right"></i>
-        <span class="text-[15px] ml-4 text-gray-200 font-bold">Logout</span>
-      </div>
-    </a>
+    <div class="flex-grow ml-[300px]">
+      {% block content %}
+      <!-- This block will be filled with content in your other templates -->
+      {% endblock %}
   </div>
-  {% block content %}
-  <!-- This block will be filled with content in your other templates -->
-  {% endblock %}
+  </div>
 
   <script type="text/javascript">
     function dropdown() {
@@ -83,15 +97,15 @@
     dropdown();
 
     function openSidebar() {
-    var sidebar = document.querySelector(".sidebar");
-    if (sidebar.classList.contains("hidden")) {
-      sidebar.classList.remove("hidden");
-      sidebar.classList.add("block"); // Add a class that sets display: block;
-    } else {
-      sidebar.classList.add("hidden");
-      sidebar.classList.remove("block"); // Remove the class that sets display: block;
+      var sidebar = document.querySelector(".sidebar");
+      if (sidebar.classList.contains("hidden")) {
+        sidebar.classList.remove("hidden");
+        sidebar.classList.add("block"); // Add a class that sets display: block;
+      } else {
+        sidebar.classList.add("hidden");
+        sidebar.classList.remove("block"); // Remove the class that sets display: block;
+      }
     }
-  }
   </script>
 </body>
 

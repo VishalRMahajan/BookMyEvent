@@ -1,21 +1,21 @@
+from datetime import datetime
 from flask_wtf import FlaskForm
-from wtforms import SelectField, StringField, PasswordField, SubmitField,TextAreaField
-from wtforms.validators import InputRequired, Length, ValidationError
-from .models import Fest, Event
+from wtforms import DateField, DateTimeLocalField, FloatField, IntegerField, SelectField, StringField, PasswordField, SubmitField,TextAreaField, TimeField
+from wtforms.validators import InputRequired, Length, ValidationError, NumberRange
+from .models import  Event
 from app import bcrypt
 
-class AddFest(FlaskForm):
-    fest_id = StringField('fid', validators=[InputRequired(), Length(min=6, max=6)], render_kw={"placeholder": "Enter your PID"})
-    fest_name = StringField('fest_name', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Enter Fest Name"})
-    committee = SelectField('Committee', choices=[('ITSA', 'ITSA'), ('ISTE', 'ISTE'), ('CSI', 'CSI')], validators=[InputRequired()])
-    coordinator = StringField('coordinator', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Enter Coordinator"})
-    description = TextAreaField('Description', validators=[InputRequired(), Length(min=4, max=200)], render_kw={"placeholder": "Enter Description"})
-    submit = SubmitField('Add Fest')
+
 
 class AddEvent(FlaskForm):
-    event_id = StringField('eid', validators=[InputRequired(), Length(min=6, max=6)], render_kw={"placeholder": "Enter your PID"})
-    event_name = StringField('event_name', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Enter Event Name"})
-    committee = SelectField('Committee', choices=[('ITSA', 'ITSA'), ('ISTE', 'ISTE'), ('CSI', 'CSI')], validators=[InputRequired()])
-    coordinator = StringField('cooridnator', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Enter Coordinator"})
-    description = TextAreaField('Description', validators=[InputRequired(), Length(min=4, max=200)], render_kw={"placeholder": "Enter Description"})
+    event_name = StringField('event_name', validators=[InputRequired(), Length(min=2, max=25)], render_kw={"placeholder": "Event Name"})
+    committee = SelectField('Committee', choices=[('none', '-- Choose Committee --'),('StudentCouncil', 'Student Council'),('ITSA', 'ITSA'), ('ISTE', 'ISTE'), ('CSI', 'CSI')], validators=[InputRequired()])
+    fest = SelectField('Committee', choices=[('none', '-- Choose Fest --'), ('Mosaic', 'Mosaic'), ('iris', 'Iris'),('Ignitra', 'Ignitra'),('Other', 'Other')], validators=[InputRequired()])
+    contact_person = StringField('cooridnator', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Contact Person"})
+    description = TextAreaField('Description', validators=[InputRequired(), Length(min=4, max=200)], render_kw={"placeholder": "Details about the event"})
+    date_added = DateField('DateAdded', default=datetime.today)
+    event_datetime = DateTimeLocalField('EventDateTime', format='%Y-%m-%dT%H:%M', validators=[InputRequired()])
+    ticket_price = IntegerField('TicketPrice', validators=[InputRequired(), Length(min=0, max=5)], render_kw={"placeholder": "Price (Enter 0 if free)"})
+    venue = StringField('Venue', validators=[InputRequired(), Length(max=50)], render_kw={"placeholder": "Venue"})
+    phone_number = IntegerField('PhoneNumber', validators=[InputRequired()], render_kw={"placeholder": "Contact Person's Phone Number"})
     submit = SubmitField('Add Event')

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" href="../css/style.css" />
 <title>{{first_name}} {{role}}'s Dashboard</title>
-<section class="main">
+<section class="main ">
   <div class="fest text">
     <div class="card">
       <div class="flex items-center justify-center">
@@ -37,30 +38,67 @@
     <h1>Ongoing Events</h1>
     <div class="event-box">
       <ul>
-        <li class="active">In progress</li>
-        <li>explore</li>
-        <li>incoming</li>
-        <li>finished</li>
+        <li id="in-progress-tab" class="active">In progress</li>
+        <li id="incoming-tab">Incoming</li>
+        <li id="completed-tab">Completed</li>
       </ul>
-      <div class="event">
+      <div id="in-progress-events" class="event">
+        {% for event in in_progress_events %}
         <div class="box">
-          <h3>Event 1</h3>
-          <p>Date</p>
+          <h3>{{ event.event_name }}</h3>
+          <p>{{ event.event_datetime }}</p>
           <button>Buy Ticket</button>
         </div>
-        <div class="box">
-          <h3>Event 2</h3>
-          <p>Date</p>
-          <button>Buy Ticket</button>
-        </div>
-        <div class="box">
-          <h3>Event 3</h3>
-          <p>Date</p>
-          <button>Buy Ticket</button>
-        </div>
+        {% endfor %}
+      </div>
+      <div id="incoming-events" class="event">
+        <!-- Loop to generate incoming events goes here -->
+      </div>
+      <div id="completed-events" class="event">
+        <!-- Loop to generate completed events goes here -->
       </div>
     </div>
   </section>
+  
 
-</section>
+  <script>
+    var tabs = document.querySelectorAll('li');
+    
+    // Function to remove the 'active' class from all tabs
+    function removeActiveClass() {
+      tabs.forEach(function(tab) {
+        tab.classList.remove('active');
+      });
+    }
+    
+    // Function to hide all event divs
+    function hideAllEventDivs() {
+      var eventDivs = document.querySelectorAll('.event');
+      eventDivs.forEach(function(div) {
+        div.style.display = 'none';
+      });
+    }
+    
+    // Add event listeners to the tabs
+    document.getElementById('incoming-tab').addEventListener('click', function() {
+      removeActiveClass();
+      this.classList.add('active');
+      hideAllEventDivs();
+      document.getElementById('incoming-events').style.display = 'block';
+    });
+    
+    document.getElementById('in-progress-tab').addEventListener('click', function() {
+      removeActiveClass();
+      this.classList.add('active');
+      hideAllEventDivs();
+      document.getElementById('in-progress-events').style.display = 'block';
+    });
+    
+    document.getElementById('completed-tab').addEventListener('click', function() {
+      removeActiveClass();
+      this.classList.add('active');
+      hideAllEventDivs();
+      document.getElementById('completed-events').style.display = 'block';
+    });
+    </script>
 {% endblock %}
