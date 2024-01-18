@@ -2,41 +2,41 @@
 
 {% block content %}
 <link rel="stylesheet" href="../css/style.css" />
-<title>{{first_name}} {{role}}'s Dashboard</title>
+<title>{{first_name}}'s Dashboard</title>
 <section class="main ">
   <div class="fest text">
-    <div class="card">
+    <div class="card glass">
       <div class="flex items-center justify-center">
         <img src="{{ url_for('static', filename='../css/Irislogo.jpg') }}" class="h-16 w-16 rounded-full mt-2">
       </div>
       <h3>IRIS</h3>
       <p>Cultural Fest of SFIT</p>
-      <button class="bg-[#002D74] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
+      <button class="bg-[#2563eb] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
         Started</button>
     </div>
-    <div class="card">
+    <div class="card glass">
       <div class="flex items-center justify-center">
         <img src="{{ url_for('static', filename='../css/Mosaic Logo.jpg') }}" class="h-16 w-16 rounded-full mt-2">
       </div>
       <h3>Mosaic</h3>
       <p>Technical Fest of SFIT</p>
-      <button class="bg-[#002D74] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
+      <button class="bg-[#2563eb] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
         Started</button>
     </div>
-    <div class="card">
+    <div class="card glass">
       <div class="flex items-center justify-center">
         <img src="{{ url_for('static', filename='../css/Ignitra Logo.jpg') }}" class="h-16 w-16 rounded-full mt-2">
       </div>
       <h3>Ignitra</h3>
       <p>Sport Fest of SFIT</p>
-      <button class="bg-[#002D74] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
+      <button class="bg-[#2563eb] rounded-xl text-white py-2 px-4 my-4 hover:scale-105 duration-300">Get
         Started</button>
     </div>
   </div>
 
   <section class="main-event">
-    <h1>Ongoing Events</h1>
-    <div class="event-box">
+
+    <div class="event-box glass">
       <ul>
         <li id="in-progress-tab" class="active">In progress</li>
         <li id="incoming-tab">Incoming</li>
@@ -44,9 +44,14 @@
       </ul>
       <div id="in-progress-events" class="event">
         {% for event in in_progress_events %}
-        <div class="box">
+        <div class="box glass">
           <h3>{{ event.event_name }}</h3>
           <p>{{ event.event_datetime }}</p>
+          <p>Organized By {{ event.committee}}</p>
+          <p>Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{% endif %}</p>
+          <a href="{{ url_for('festpage', event_name=event.event_name) }}">
+            <button>View Details</button>
+          </a>
           <button>Buy Ticket</button>
         </div>
         {% endfor %}
@@ -55,50 +60,78 @@
         <!-- Loop to generate incoming events goes here -->
       </div>
       <div id="completed-events" class="event">
-        <!-- Loop to generate completed events goes here -->
+        {% for event in completed_events %}
+        <div class="box glass">
+          <h3>{{ event.event_name }}</h3>
+          <p>{{ event.event_datetime }}</p>
+          <p>Organized By {{ event.committee}}</p>
+          <p>Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{% endif %}</p>
+          <a href="{{ url_for('festpage', event_name=event.event_name) }}">
+            <button>View Details</button>
+          </a>
+          <button>Closed</button>
+        </div>
+        {% endfor %}
       </div>
-    </div>
   </section>
-  
+
 
   <script>
     var tabs = document.querySelectorAll('li');
-    
+
     // Function to remove the 'active' class from all tabs
     function removeActiveClass() {
-      tabs.forEach(function(tab) {
+      tabs.forEach(function (tab) {
         tab.classList.remove('active');
       });
     }
-    
+
     // Function to hide all event divs
     function hideAllEventDivs() {
       var eventDivs = document.querySelectorAll('.event');
-      eventDivs.forEach(function(div) {
+      eventDivs.forEach(function (div) {
         div.style.display = 'none';
       });
     }
-    
+
     // Add event listeners to the tabs
-    document.getElementById('incoming-tab').addEventListener('click', function() {
+    // Add event listeners to the tabs
+
+
+    document.getElementById('in-progress-tab').addEventListener('click', function () {
       removeActiveClass();
       this.classList.add('active');
       hideAllEventDivs();
-      document.getElementById('incoming-events').style.display = 'block';
+      var inProgressEventsDiv = document.getElementById('in-progress-events');
+      var displayStyle = window.getComputedStyle(inProgressEventsDiv).display;
+      if (displayStyle === 'none') {
+        inProgressEventsDiv.style.display = 'flex';
+        inProgressEventsDiv.style.flexDirection = 'row';
+      }
     });
-    
-    document.getElementById('in-progress-tab').addEventListener('click', function() {
+
+    document.getElementById('incoming-tab').addEventListener('click', function () {
       removeActiveClass();
       this.classList.add('active');
       hideAllEventDivs();
-      document.getElementById('in-progress-events').style.display = 'block';
+      var incomingEventsDiv = document.getElementById('incoming-events');
+      var displayStyle = window.getComputedStyle(incomingEventsDiv).display;
+      if (displayStyle === 'none') {
+        incomingEventsDiv.style.display = 'flex';
+        incomingEventsDiv.style.flexDirection = 'row';
+      }
     });
-    
-    document.getElementById('completed-tab').addEventListener('click', function() {
+
+    document.getElementById('completed-tab').addEventListener('click', function () {
       removeActiveClass();
       this.classList.add('active');
       hideAllEventDivs();
-      document.getElementById('completed-events').style.display = 'block';
+      var completedEventsDiv = document.getElementById('completed-events');
+      var displayStyle = window.getComputedStyle(completedEventsDiv).display;
+      if (displayStyle === 'none') {
+        completedEventsDiv.style.display = 'flex';
+        completedEventsDiv.style.flexDirection = 'row';
+      }
     });
-    </script>
-{% endblock %}
+  </script>
+  {% endblock %}

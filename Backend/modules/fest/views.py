@@ -37,3 +37,22 @@ def addevent():
     print(form.errors)
 
     return render_template('addevent.html', form=form)
+
+
+@app.route('/event/<event_name>')
+@login_required
+def festpage(event_name):
+    event_name_with_spaces = event_name.replace('-', ' ')
+    event = Event.query.filter_by(event_name=event_name_with_spaces).first()
+    if event is None:
+        abort(404)
+    return render_template('festpage.html', event_name=event.event_name, 
+            committee=event.committee, 
+            fest=event.fest,
+            contact_person=event.contact_person,
+            description=event.description,
+            date_added=event.date_added,
+            event_datetime=event.event_datetime,
+            ticket_price=event.ticket_price,
+            venue=event.venue,
+            phone_number=event.phone_number )

@@ -11,15 +11,17 @@ from datetime import datetime
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return redirect(url_for('login'))
 
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
     today = datetime.today()
-    in_progress_events = Event.query.filter(Event.event_datetime >= today).all()
-    return render_template('dashboard.html', first_name=current_user.first_name, role=current_user.role, in_progress_events=in_progress_events)
+    in_progress_events = Event.query.filter(Event.event_datetime > today).all()
+    print(in_progress_events)
+    completed_events = Event.query.filter(Event.event_datetime < today).all()
+    return render_template('dashboard.html', first_name=current_user.first_name, role=current_user.role, in_progress_events=in_progress_events, completed_events=completed_events)
 
 
 @app.route('/profile')

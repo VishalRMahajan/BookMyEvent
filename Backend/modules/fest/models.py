@@ -13,6 +13,7 @@ class Event(db.Model):
     ticket_price = db.Column(db.Integer, nullable=False) 
     venue = db.Column(db.String(100), nullable=False)
     phone_number = db.Column(db.Integer, nullable=False)
+    
 
 
     def get_id(self):
