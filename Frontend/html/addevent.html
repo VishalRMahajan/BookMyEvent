@@ -4,12 +4,12 @@
 
 <title>Add Event</title>
 <div class="flex justify-center items-center h-screen ">
-    <form method="POST" class="p-5  w-11/12 ">
+    <form method="POST" enctype="multipart/form-data" class="p-5  w-11/12 ">
         {{ form.hidden_tag() }}
         <div class="grid gap-4 mb-4 md:grid-cols-2 mt-4">
             <div>
                 <label for="event_name" class="block mb-2 text-sm font-medium  text-white">Event name</label>
-                {{ form.event_name(class=" block w-full p-2.5 bg-white/20 backdrop-blur-md  rounded-lg border-gray-600
+                {{ form.event_name(class=" block w-full p-2.5 bg-white/20 backdrop-blur-md rounded-lg border-gray-600
                 placeholder-gray-400
                 text-white focus:ring-blue-500 focus:border-blue-500") }}
             </div>
@@ -21,15 +21,19 @@
                 text-white focus:ring-blue-500 focus:border-blue-500") }}
             </div>
 
-            <div>
-                <label for="committee" class="block mb-2 text-sm font-medium  text-white">Committee</label>
-                {{ form.committee(class=" block w-full p-2.5 bg-white/20 backdrop-blur-md rounded-lg border-gray-600 placeholder-gray-400
-                text-white focus:ring-blue-500 focus:border-blue-500") }}
-            </div>
-            <div>
-                <label for="fest" class="block mb-2 text-sm font-medium  text-white">Fest</label>
-                {{ form.fest(class=" block w-full p-2.5 bg-white/20 backdrop-blur-md rounded-lg border-gray-600 placeholder-gray-400
-                text-white focus:ring-blue-500 focus:border-blue-500") }}
+            <div style="display: flex; justify-content: space-between;">
+                <div style="flex: 1; margin-right: 10px;">
+                    <label for="committee" class="block mb-2 text-sm font-medium  text-white">Committee</label>
+                    {{ form.committee(class="block w-full p-2.5 bg-[#3b4759] backdrop-blur-md rounded-lg border-gray-600
+                    text-white 
+                    placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500") }}
+                </div>
+                <div style="flex: 1; margin-right: 10px;">
+                    <label for="fest" class="block mb-2 text-sm font-medium  text-white">Fest</label>
+                    {{ form.fest(class=" block w-full p-2.5 bg-[#3b4759] backdrop-blur-md rounded-lg border-gray-600
+                    placeholder-gray-400
+                    text-white focus:ring-blue-500 focus:border-blue-500") }}
+                </div>
             </div>
             <div>
                 <label for="ticket_price" class="block mb-2 text-sm font-medium  text-white">Ticket Price</label>
@@ -39,17 +43,25 @@
             </div>
             <div>
                 <label for="Event Venue" class="block mb-2 text-sm font-medium  text-white">Venue</label>
-                {{ form.venue(class=" block w-full p-2.5 bg-white/20 backdrop-blur-md rounded-lg border-gray-600 placeholder-gray-400
+                {{ form.venue(class=" block w-full p-2.5 bg-white/20 backdrop-blur-md rounded-lg border-gray-600
+                placeholder-gray-400
                 text-white focus:ring-blue-500 focus:border-blue-500") }}
             </div>
             <div>
                 <label for="Contact Person" class="block mb-2 text-sm font-medium  text-white">Contact Person</label>
-                {{ form.contact_person(class=" block w-full p-2.5 bg-white/20 backdrop-blur-md rounded-lg border-gray-600
+                {{ form.contact_person(class=" block w-full p-2.5 bg-white/20 backdrop-blur-md rounded-lg
+                border-gray-600
                 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500") }}
             </div>
             <div>
                 <label for="Contact Number" class="block mb-2 text-sm font-medium  text-white">Contact Number</label>
                 {{ form.phone_number(class=" block w-full p-2.5 bg-white/20 backdrop-blur-md rounded-lg border-gray-600
+                placeholder-gray-400
+                text-white focus:ring-blue-500 focus:border-blue-500") }}
+            </div>
+            <div>
+                <label for="Poster" class="block mb-2 text-sm font-medium  text-white">Poster (Will Be Displayed at Dashboard)</label>
+                {{ form.image_file(class=" block w-full p-2.5 bg-white/20 backdrop-blur-md rounded-lg border-gray-600
                 placeholder-gray-400
                 text-white focus:ring-blue-500 focus:border-blue-500") }}
             </div>

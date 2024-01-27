@@ -1,7 +1,10 @@
 from datetime import datetime
+import os
+from flask import current_app
 from flask_wtf import FlaskForm
-from wtforms import DateField, DateTimeLocalField, FloatField, IntegerField, SelectField, StringField, PasswordField, SubmitField,TextAreaField, TimeField
-from wtforms.validators import InputRequired, Length, ValidationError, NumberRange
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import DateField, DateTimeLocalField, FileField, IntegerField, SelectField, StringField, SubmitField,TextAreaField
+from wtforms.validators import InputRequired, Length, NumberRange
 from .models import  Event
 from app import bcrypt
 
@@ -15,7 +18,10 @@ class AddEvent(FlaskForm):
     description = TextAreaField('Description', validators=[InputRequired(), Length(min=4, max=200)], render_kw={"placeholder": "Details about the event"})
     date_added = DateField('DateAdded', default=datetime.today)
     event_datetime = DateTimeLocalField('EventDateTime', format='%Y-%m-%dT%H:%M', validators=[InputRequired()])
-    ticket_price = IntegerField('TicketPrice', validators=[InputRequired(), Length(min=0, max=5)], render_kw={"placeholder": "Price (Enter 0 if free)"})
+    ticket_price = IntegerField('TicketPrice', validators=[InputRequired(), NumberRange(min=0, max=10000)], render_kw={"placeholder": "Price (Enter 0 if free)"})
     venue = StringField('Venue', validators=[InputRequired(), Length(max=50)], render_kw={"placeholder": "Venue"})
     phone_number = IntegerField('PhoneNumber', validators=[InputRequired()], render_kw={"placeholder": "Contact Person's Phone Number"})
+    image_file = FileField('Event Image', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Add Event')
+
+    

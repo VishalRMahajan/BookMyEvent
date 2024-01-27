@@ -1,3 +1,4 @@
+import os
 import random
 from flask import render_template, url_for, redirect,abort
 from app import app
@@ -7,6 +8,8 @@ from modules.users.models import Student, Committee
 from utils.auth import login_manager
 from app import bcrypt, db
 from flask_login import current_user, login_user, login_required, logout_user
+from werkzeug.utils import secure_filename
+from flask import request
 
 
 
@@ -18,6 +21,13 @@ def addevent():
     form=AddEvent()
 
     if form.validate_on_submit():
+        if 'image_file' in request.files:
+            image_file = request.files['image_file']
+            filename = secure_filename(image_file.filename)
+            image_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            image_filename = filename
+        else:
+            image_filename = None 
         event = Event(
             event_name=form.event_name.data, 
             committee=form.committee.data, 
@@ -28,7 +38,8 @@ def addevent():
             event_datetime=form.event_datetime.data,
             ticket_price=form.ticket_price.data,
             venue=form.venue.data,
-            phone_number=form.phone_number.data
+            phone_number=form.phone_number.data,
+            image_file=image_filename
         )
         db.session.add(event)
         db.session.commit()

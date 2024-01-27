@@ -34,46 +34,7 @@
     </div>
   </div>
 
-  <section class="main-event">
-
-    <div class="event-box glass">
-      <ul>
-        <li id="in-progress-tab" class="active">In progress</li>
-        <li id="incoming-tab">Incoming</li>
-        <li id="completed-tab">Completed</li>
-      </ul>
-      <div id="in-progress-events" class="event">
-        {% for event in in_progress_events %}
-        <div class="box glass">
-          <h3>{{ event.event_name }}</h3>
-          <p>{{ event.event_datetime }}</p>
-          <p>Organized By {{ event.committee}}</p>
-          <p>Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{% endif %}</p>
-          <a href="{{ url_for('festpage', event_name=event.event_name) }}">
-            <button>View Details</button>
-          </a>
-          <button>Buy Ticket</button>
-        </div>
-        {% endfor %}
-      </div>
-      <div id="incoming-events" class="event">
-        <!-- Loop to generate incoming events goes here -->
-      </div>
-      <div id="completed-events" class="event">
-        {% for event in completed_events %}
-        <div class="box glass">
-          <h3>{{ event.event_name }}</h3>
-          <p>{{ event.event_datetime }}</p>
-          <p>Organized By {{ event.committee}}</p>
-          <p>Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{% endif %}</p>
-          <a href="{{ url_for('festpage', event_name=event.event_name) }}">
-            <button>View Details</button>
-          </a>
-          <button>Closed</button>
-        </div>
-        {% endfor %}
-      </div>
-  </section>
+  
 
 
   <script>
