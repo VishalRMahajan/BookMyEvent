@@ -1,3 +1,4 @@
+from flask import redirect, session, url_for
 from flask_wtf import FlaskForm
 from wtforms import SelectField, StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
@@ -46,6 +47,7 @@ class loginStudent(FlaskForm):
     password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Enter your Password"})
     submit = SubmitField('login')
 
+    
     def validate_email(self, email):
         user = None
         if self.role.data == 'User':
@@ -58,3 +60,15 @@ class loginStudent(FlaskForm):
         else:
             if bcrypt.check_password_hash(user.password, self.password.data) is False:
                 raise ValidationError('Password is incorrect. Please try again')
+            
+        if user.is_active is False:
+            raise ValidationError('Please verify your email')
+
+
+class Otp(FlaskForm):
+    otp = StringField('otp', validators=[InputRequired(), Length(min=6, max=6)], render_kw={"placeholder": "Enter OTP"})
+    
+    def validate_otp(self, otp):
+        if otp.data != session['otp']:
+            raise ValidationError('OTP is incorrect. Please try again')
+    submit = SubmitField('Verify OTP')
