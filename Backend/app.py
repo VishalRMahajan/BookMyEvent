@@ -11,4 +11,4 @@ db=SQLAlchemy(app)
 bcrypt=Bcrypt(app)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, '../Frontend/images')
+app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, '../Frontend/css/images')

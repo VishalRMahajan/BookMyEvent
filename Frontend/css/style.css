@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700");
-*{
+
+* {
   margin: 0;
   padding: 0;
   outline: none;
@@ -8,24 +9,28 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body{
+
+body {
   background: #dfe9f5;
 }
-.container{
+
+.container {
   display: flex;
 }
 
-.logo{
+.logo {
   text-align: center;
   display: flex;
   margin: 10px 0 0 10px;
 }
-.logo img{
+
+.logo img {
   width: 45px;
   height: 45px;
   border-radius: 50%;
 }
-.logo span{
+
+.logo span {
   font-weight: bold;
   padding-left: 15px;
   font-size: 18px;
@@ -33,7 +38,7 @@ body{
 }
 
 
-.logout{
+.logout {
   position: absolute;
   bottom: 0;
 }
@@ -47,22 +52,26 @@ body{
   left: 50%;
   transform: translate(-36%, -53%);
 }
-.main-top{
+
+.main-top {
   display: flex;
   width: 100%;
 }
-.main-top i{
+
+.main-top i {
   position: absolute;
   right: 0;
   margin: 10px 30px;
   color: rgb(110, 109, 109);
   cursor: pointer;
 }
-.fest{
+
+.fest {
   display: flex;
   margin-top: 20px;
 }
-.fest .card{
+
+.fest .card {
   width: 25%;
   margin: 10px;
   color: white;
@@ -71,68 +80,79 @@ body{
   padding: 10px;
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
-.fest .card h3{
+
+.fest .card h3 {
   margin: 10px;
   text-transform: capitalize;
 }
-.fest .card p{
+
+.fest .card p {
   font-size: 12px;
 }
 
 
-.fest .card i{
+.fest .card i {
   font-size: 22px;
   padding: 10px;
 }
 
 /* Event */
-.main-event{
-  margin-top:20px ;
-  text-transform: capitalize;
-}
-.event-box{
+
+.event-box {
   width: 100%;
-  height: 325px;
-  padding: 10px 10px 30px 10px;
+  height: 430px;
+  padding: 10px 10px 20px 20px;
   margin-top: 10px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
-.event-box ul{
+
+.event-box ul {
   list-style: none;
   display: flex;
 }
-.event-box ul li{
+
+.event-box ul li {
   margin: 10px;
   color: white;
   cursor: pointer;
 }
+
 .event-box ul .active {
-  background-color: #2563eb; /* Equivalent to bg-[#002D74] in Tailwind */
-  color: white; /* Equivalent to text-white in Tailwind */
-  padding: 0.5rem 1rem; /* Equivalent to py-2 px-4 in Tailwind */
-  border-radius: 1.5rem; /* Equivalent to rounded-xl in Tailwind */
-  transition: transform 0.3s; /* Equivalent to duration-300 in Tailwind */
+  background-color: #2563eb;
+  /* Equivalent to bg-[#002D74] in Tailwind */
+  color: white;
+  /* Equivalent to text-white in Tailwind */
+  padding: 0.5rem 1rem;
+  /* Equivalent to py-2 px-4 in Tailwind */
+  border-radius: 1.5rem;
+  /* Equivalent to rounded-xl in Tailwind */
+  transition: transform 0.3s;
+  /* Equivalent to duration-300 in Tailwind */
 }
 
 .event-box ul .active:hover {
-  transform: scale(1.05); /* Equivalent to hover:scale-105 in Tailwind */
+  transform: scale(1.05);
+  /* Equivalent to hover:scale-105 in Tailwind */
 }
 
 .event-box ul li:not(.active) {
-  margin-top: 20px; /* Add a top margin to move the elements down */
+  margin-top: 20px;
+  /* Add a top margin to move the elements down */
   margin-right: 10px;
   color: white;
   cursor: pointer;
 }
-.event-box .event{
+
+.event-box .event {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: start;
 }
-.box{
+
+.box {
   width: 33%;
   padding: 10px;
   margin: 10px;
@@ -140,11 +160,13 @@ body{
 
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
-.box p{
+
+.box p {
   font-size: 12px;
   margin-top: 5px;
 }
-.box button{
+
+.box button {
   background: #2563eb;
   color: #fff;
   padding: 7px 10px;
@@ -152,143 +174,66 @@ body{
   margin-top: 3rem;
   cursor: pointer;
 }
-.box button:hover{
+
+.box button:hover {
   background: #2563eb;
   scale: 1.04;
 }
-.box i{
+
+.box i {
   font-size: 7rem;
   float: right;
   margin: -20px 20px 20px 0;
 }
-.html{
+
+.html {
   color: rgb(25, 94, 54);
 }
-.css{
+
+.css {
   color: rgb(104, 179, 35);
 }
-.js{
+
+.js {
   color: rgb(28, 98, 179);
 }
 
 
 .glass {
-  background: rgba(255, 255, 255, 0.2); 
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
 }
 
-/* in progress events */
 
-#in-progress-events {
-  display: flex; /* Makes the children of #in-progress-events line up horizontally */
-  overflow-x: scroll; /* Allows horizontal scrolling when the content overflows the container */
-  flex-wrap: nowrap; /* Prevents the children from wrapping to the next line */
-  flex-direction: row; /* Ensures that the flex items are displayed as a row */
+.flip-card {
+  width: 250px;
+  height: 350px;
+  padding: 10px 0px 0px 0px;
+  perspective: 600px;
 }
 
-#in-progress-events .box {
-  flex: 0 0 auto; /* Prevents the events from shrinking and makes them stay their original width */
-  margin-right: 20px; /* Adds some space between the events */
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
 }
 
-
-#in-progress-events::-webkit-scrollbar {
-  width: 50vw;
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
 }
 
-#in-progress-events::-webkit-scrollbar-thumb {
-  background: linear-gradient(to right, transparent, #2563eb);
-  border-radius: 20px;
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
 }
 
-#in-progress-events::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to right, transparent, #2563eb);
-  border-radius: 20px;
+.flip-card-back {
+  transform: rotateY(180deg);
 }
-
-#in-progress-events::-webkit-scrollbar-track {
-  background-color: transparent;
-  border-radius: 20px;
-}
-
-#in-progress-events::-webkit-scrollbar-track:hover {
-  background-color: transparent;
-}
-
-/* upcoming events */
-
-#upcoming-events {
-  display: flex; /* Makes the children of #upcoming-events line up horizontally */
-  overflow-x: auto; /* Allows horizontal scrolling when the content overflows the container */
-  flex-wrap: nowrap; /* Prevents the children from wrapping to the next line */
-  flex-direction: row; /* Ensures that the flex items are displayed as a row */
-}
-
-#upcoming-events .box {
-  flex: 0 0 auto; /* Prevents the events from shrinking and makes them stay their original width */
-  margin-right: 20px; /* Adds some space between the events */
-}
-
-#upcoming-events::-webkit-scrollbar {
-  width: 10px;
-}
-
-#upcoming-events::-webkit-scrollbar-thumb {
-  background: linear-gradient(to right, transparent, #2563eb);
-  border-radius: 20px;
-}
-
-#upcoming-events::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to right, transparent, #2563eb);
-  border-radius: 20px;
-}
-
-#upcoming-events::-webkit-scrollbar-track {
-  background-color: transparent;
-  border-radius: 20px;
-}
-
-#upcoming-events::-webkit-scrollbar-track:hover {
-  background-color: transparent;
-}
-
-/* completed events */
-
-#completed-events {
-  display: flex; /* Makes the children of #completed-events line up horizontally */
-  overflow-x: auto; /* Allows horizontal scrolling when the content overflows the container */
-  flex-wrap: nowrap; /* Prevents the children from wrapping to the next line */
-  flex-direction: row; /* Ensures that the flex items are displayed as a row */
-}
-
-#completed-events .box {
-  flex: 0 0 auto; /* Prevents the events from shrinking and makes them stay their original width */
-  margin-right: 20px; /* Adds some space between the events */
-}
-
-
-#completed-events::-webkit-scrollbar {
-  width: 10px;
-}
-
-#completed-events::-webkit-scrollbar-thumb {
-  background: linear-gradient(to right, transparent, #2563eb);
-  border-radius: 20px;
-}
-
-#completed-events::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to right, transparent, #2563eb);
-  border-radius: 20px;
-}
-
-#completed-events::-webkit-scrollbar-track {
-  background-color: transparent;
-  border-radius: 20px;
-}
-
-#completed-events::-webkit-scrollbar-track:hover {
-  background-color: transparent;
-}
-
