@@ -41,7 +41,7 @@
           <span class="text-[15px] ml-4 text-gray-200 font-bold">Profile</span>
         </div>
       </a>
-      {% if current_user.role == 'Committee' %}
+      {% if current_user.role == 'Committee' or current_user.role == 'Coordinator' %}
       <div class="my-4 bg-gray-600 h-[1px]"></div>
       <a href="{{url_for('addevent')}}">
         <div

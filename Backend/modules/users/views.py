@@ -1,7 +1,7 @@
 from flask import flash, render_template, request, session, url_for, redirect
 from app import app
-from .forms import loginStudent, RegisterStudent, Otp
-from .models import Student, Committee
+from .forms import loginStudent, RegisterStudent, Otp, AddCommittee
+from .models import Student, Coordinator, Committee
 from utils.auth import login_manager
 from app import bcrypt, db
 from flask_login import login_user, login_required, logout_user
@@ -19,6 +19,12 @@ def login():
                 if bcrypt.check_password_hash(student.password, form.password.data):
                     login_user(student)
                     return redirect(url_for('dashboard')) 
+        elif form.role.data == 'Coordinator':
+            coordinator= Coordinator.query.filter_by(email=form.email.data).first()
+            if coordinator:
+                if bcrypt.check_password_hash(coordinator.password, form.password.data):
+                    login_user(coordinator)
+                    return redirect(url_for('dashboard'))
         elif form.role.data == 'Committee':
             committee= Committee.query.filter_by(email=form.email.data).first()
             if committee:
@@ -40,8 +46,10 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         if form.role.data == 'User':
             user = Student(pid=form.pid.data, first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, password=hashed_password, is_active=False)
+        elif form.role.data == 'Coordinator':
+            user = Coordinator(role=form.role.data,committee=form.committee.data, first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, password=hashed_password, is_active=False)
         elif form.role.data == 'Committee':
-            user = Committee(pid=form.pid.data, first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, password=hashed_password, is_active=False)
+            user = Committee(role=form.role.data,committee=form.committee.data, first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, password=hashed_password, is_active=False)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('otp_verification'))
@@ -73,6 +81,8 @@ def otp_verification():
             role = session['role']
             if role == 'User':
                 user = Student.query.filter_by(email=email).first()
+            elif role == 'Coordinator':
+                user = Coordinator.query.filter_by(email=email).first()
             elif role == 'Committee':
                 user = Committee.query.filter_by(email=email).first()
             # Update the is_active attribute
@@ -88,8 +98,11 @@ def otp_verification():
 def verify_email():
     email = request.args.get('email')
     role = session['role']
+    user = None
     if role == 'User':
         user = Student.query.filter_by(email=email).first()
+    elif role == 'Coordinator':
+        user = Coordinator.query.filter_by(email=email).first()
     elif role == 'Committee':
         user = Committee.query.filter_by(email=email).first()
     if not user:
@@ -104,8 +117,10 @@ def verify_email():
         send_otp(email, otp)
     if form.validate_on_submit():
         if form.otp.data == session['otp']:
-            user.is_active = True
-            db.session.commit()
+            if user:
+                user.is_active = True
+                db.session.commit()
             session.pop('otp', None)
             return redirect(url_for('login'))
     return render_template("otp.html", form=form)
+
