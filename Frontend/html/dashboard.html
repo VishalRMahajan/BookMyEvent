@@ -50,8 +50,8 @@
               <img src="{{ url_for('static', filename='images/' + event.image_file)  }}" alt="Event image"
                 style="width:100%;height:100%;">
             </div>
-            <div class="flip-card-back">
-              <h3>{{ event.event_name }}</h3>
+            <div class="flip-card-back glass rounded-2xl ">
+              <h1 class="text-2xl text-center font-extrabold mt-4">{{ event.event_name }}</h1>
               <p>{{ event.event_datetime }}</p>
               <p>Organized By {{ event.committee}}</p>
               <p>Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{% endif %}</p>
