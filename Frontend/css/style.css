@@ -154,7 +154,7 @@ body {
 
 .box {
   width: 33%;
-  padding: 10px;
+  padding: 20px;
   margin: 10px;
   border-radius: 10px;
 
@@ -210,8 +210,9 @@ body {
 .flip-card {
   width: 220px;
   height: 300px;
-  padding: 10px 0px 0px 0px;
+  padding: 10px 0px 0px 10px;
   perspective: 600px;
+
 }
 
 .flip-card-inner {
