@@ -6,5 +6,5 @@ flask_wtf
 wtforms
 email_validator
 pymysql
-pyot
+pyotp
 flask-mail
