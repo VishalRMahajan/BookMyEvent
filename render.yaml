@@ -1,0 +1,11 @@
+services:
+- type: web
+  name: flask-app
+  env: python
+  buildCommand: pip install -r Requirement.txt
+  startCommand: python Backend/main.py
+  envVars:
+  - key: FLASK_APP
+    value: Backend/main.py
+  - key: FLASK_ENV
+    value: production
