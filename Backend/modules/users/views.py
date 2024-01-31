@@ -11,7 +11,7 @@ from modules.email.views import send_otp
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form=loginStudent()
-
+    session['role']= form.role.data
     if form.validate_on_submit():
         if form.role.data == 'User':
             student= Student.query.filter_by(email=form.email.data).first()
