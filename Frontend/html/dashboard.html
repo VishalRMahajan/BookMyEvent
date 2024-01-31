@@ -39,44 +39,65 @@
     <div class="event-box glass">
       <ul>
         <li id="in-progress-tab" class="active">In progress</li>
-        <li id="incoming-tab">Incoming</li>
         <li id="completed-tab">Completed</li>
       </ul>
       <div id="in-progress-events" class="event">
         {% for event in in_progress_events %}
-        <div class="box glass">
-          <h3>{{ event.event_name }}</h3>
-          <p>{{ event.event_datetime }}</p>
-          <p>Organized By {{ event.committee}}</p>
-          <p>Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{% endif %}</p>
-          <a href="{{ url_for('festpage', event_name=event.event_name) }}">
-            <button>View Details</button>
-          </a>
-          <button>Buy Ticket</button>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front rounded-2xl">
+              <img class="rounded-2xl" src="{{ url_for('static', filename='images/' + event.image_file) }}"
+                alt="Event image" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back rounded-2xl text-center px-2 text-white relative">
+              <img class="rounded-2xl absolute top-0 left-0 w-full h-full"
+                src="{{ url_for('static', filename='images/' + event.image_file) }}" alt="Event image">
+              <div class="bg-white/20 backdrop-blur-xl absolute top-0 left-0 w-full h-full rounded-2xl ">
+                <h1 class="text-2xl font-bold mt-4 ">{{ event.event_name }}</h1>
+                <p class="mt-2.5  ">{{ event.event_datetime }}</p>
+                <p class="mt-2.5 ">Organized By {{ event.committee}}</p>
+                <p class="mt-2.5 ">Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{%
+                  endif %}</p>
+                <a href="{{ url_for('festpage', event_name=event.event_name) }}">
+                  <button class="py-2 px-5 mt-4 bg-blue-600 rounded-xl text-white hover:scale-110 duration-300">View
+                    Details</button>
+                </a>
+                <button class="py-2 px-7 mt-4 bg-blue-600 rounded-xl text-white hover:scale-110 duration-300">Buy
+                  Ticket</button>
+              </div>
+            </div>
+          </div>
         </div>
         {% endfor %}
-      </div>
-      <div id="incoming-events" class="event">
-        <!-- Loop to generate incoming events goes here -->
       </div>
       <div id="completed-events" class="event">
         {% for event in completed_events %}
-        <div class="box glass">
-          <h3>{{ event.event_name }}</h3>
-          <p>{{ event.event_datetime }}</p>
-          <p>Organized By {{ event.committee}}</p>
-          <p>Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{% endif %}</p>
-          <a href="{{ url_for('festpage', event_name=event.event_name) }}">
-            <button>View Details</button>
-          </a>
-          <button>Closed</button>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front rounded-2xl">
+              <img class="rounded-2xl" src="{{ url_for('static', filename='images/' + event.image_file)  }}"
+                alt="Event image" style="width:100%;height:100%;">
+            </div>
+            <div class="flip-card-back glass rounded-2xl px-2">
+              <h1 class="text-2xl text-center font-extrabold mt-4">{{ event.event_name }}</h1>
+              <p>{{ event.event_datetime }}</p>
+              <p>Organized By {{ event.committee}}</p>
+              <p>Ticket Price is {% if event.ticket_price == 0 %}Free{% else %}{{ event.ticket_price }}{% endif %}</p>
+              <a href="{{ url_for('festpage', event_name=event.event_name) }}">
+                <button class="py-2 px-5 bg-blue-600 rounded-xl hover:scale-110 duration-300">View Details</button>
+              </a>
+              <button class="py-2 px-5 bg-blue-600 rounded-xl hover:scale-110 duration-300">Closed</button>
+            </div>
+          </div>
         </div>
         {% endfor %}
-      </div>
   </section>
 
 
   <script>
+    window.onload = function () {
+      document.getElementById('completed-events').style.display = 'none';
+    };
     var tabs = document.querySelectorAll('li');
 
     // Function to remove the 'active' class from all tabs
@@ -93,11 +114,6 @@
         div.style.display = 'none';
       });
     }
-
-    // Add event listeners to the tabs
-    // Add event listeners to the tabs
-
-
     document.getElementById('in-progress-tab').addEventListener('click', function () {
       removeActiveClass();
       this.classList.add('active');
@@ -107,18 +123,6 @@
       if (displayStyle === 'none') {
         inProgressEventsDiv.style.display = 'flex';
         inProgressEventsDiv.style.flexDirection = 'row';
-      }
-    });
-
-    document.getElementById('incoming-tab').addEventListener('click', function () {
-      removeActiveClass();
-      this.classList.add('active');
-      hideAllEventDivs();
-      var incomingEventsDiv = document.getElementById('incoming-events');
-      var displayStyle = window.getComputedStyle(incomingEventsDiv).display;
-      if (displayStyle === 'none') {
-        incomingEventsDiv.style.display = 'flex';
-        incomingEventsDiv.style.flexDirection = 'row';
       }
     });
 
@@ -132,6 +136,14 @@
         completedEventsDiv.style.display = 'flex';
         completedEventsDiv.style.flexDirection = 'row';
       }
+    });
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.classList.add('flipped');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('flipped');
+      });
     });
   </script>
   {% endblock %}

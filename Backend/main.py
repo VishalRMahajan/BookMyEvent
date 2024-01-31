@@ -5,7 +5,7 @@ from modules.fest import views
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 from modules.fest.models import Event
-from modules.users.models import Student,Committee
+from modules.users.models import Student,Committee,Coordinator
 from modules.users.forms import loginStudent, RegisterStudent
 from datetime import datetime
 
@@ -27,7 +27,15 @@ def dashboard():
 @app.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', first_name=current_user.first_name, last_name=current_user.last_name, email=current_user.email, pid=current_user.pid, role=current_user.role)
+    pid = current_user.pid if hasattr(current_user, 'pid') else None
+    committee = current_user.committee if hasattr(current_user, 'committee') else None
+    coordinator = None
+
+    if current_user.role == 'Committee':
+        coordinator = Coordinator.query.filter_by(committee=committee).first()
+        if coordinator:
+            coordinator = coordinator.first_name + " " + coordinator.last_name
+    return render_template('profile.html', first_name=current_user.first_name, last_name=current_user.last_name, email=current_user.email, pid=pid, committee=committee, role=current_user.role,coordinator=coordinator)
 
 @app.route('/update_profile', methods=['GET', 'POST'])
 @login_required

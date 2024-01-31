@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
@@ -9,3 +10,5 @@ app.config.from_object(Config)
 db=SQLAlchemy(app)
 bcrypt=Bcrypt(app)
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, '../Frontend/css/images')
