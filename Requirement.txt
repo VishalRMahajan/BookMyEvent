@@ -7,4 +7,4 @@ wtforms
 email_validator
 pymysql
 pyotp
-python-dotenv
+flask-mail

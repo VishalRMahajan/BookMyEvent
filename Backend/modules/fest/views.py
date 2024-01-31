@@ -16,7 +16,7 @@ from flask import request
 @app.route('/addevent' , methods=['GET', 'POST']) 
 @login_required
 def addevent():
-    if current_user.role != 'Committee':
+    if current_user.role == 'User':
         abort(403)
     form=AddEvent()
 
@@ -67,3 +67,10 @@ def festpage(event_name):
             ticket_price=event.ticket_price,
             venue=event.venue,
             phone_number=event.phone_number )
+
+@app.route('/myevents')
+@login_required
+def myevents():
+    committee = current_user.committee if hasattr(current_user, 'committee') else None
+    events = Event.query.filter_by(committee=committee).all()
+    return render_template('myevents.html', events=events)
